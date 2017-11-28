@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>小丑网--电影列表</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/movies.css">
+	    <script type="text/javascript" src="/javascripts/jquery.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/bootstrap.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/navbar.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/movies.js" charset="utf-8"></script>
+		<link rel="Shortcut Icon" href="/images/icon/icon.ico">
+	</head>
+	<body>
+		<% include header.ejs %>
+		
+		<div class="article container">
+			<div class="movieType">
+				<ul class="list-group">
+				  <li class="list-group-item text-center bg-info">
+				  	<strong>类型:</strong>
+				  	<div class="btn-group btn-group-sm type" role="group" aria-label="...">
+					  <button type="button" class="btn btn-default">爱情</button>
+					  <button type="button" class="btn btn-default">喜剧</button>
+					  <button type="button" class="btn btn-default">动作</button>
+					  <button type="button" class="btn btn-default">剧情</button>
+					  <button type="button" class="btn btn-default">恐怖</button>
+					  <button type="button" class="btn btn-default">科幻</button>
+					  <button type="button" class="btn btn-default">记录</button>
+					  <button type="button" class="btn btn-default">动画</button>
+					</div>
+				  </li>
+				  <li class="list-group-item text-center">
+				  	<strong>上映时间:</strong>
+				  	<div class="btn-group btn-group-sm time" role="group" aria-label="...">
+					  <button type="button" class="btn btn-default">2017</button>
+					  <button type="button" class="btn btn-default">2016</button>
+					  <button type="button" class="btn btn-default">2015</button>
+					  <button type="button" class="btn btn-default">2014</button>
+					  <button type="button" class="btn btn-default">2013</button>
+					  <button type="button" class="btn btn-default">2012</button>
+					  <button type="button" class="btn btn-default">2011</button>
+					  <button type="button" class="btn btn-default">更早</button>
+					</div>
+				  </li>
+				  <li class="list-group-item text-center">
+				  	<strong>国家:</strong>
+				  	<div class="btn-group btn-group-sm country" role="group" aria-label="...">
+					  <button type="button" class="btn btn-default">大陆</button>
+					  <button type="button" class="btn btn-default">美国</button>
+					  <button type="button" class="btn btn-default">韩国</button>
+					  <button type="button" class="btn btn-default">日本</button>
+					  <button type="button" class="btn btn-default">英国</button>
+					  <button type="button" class="btn btn-default">意大利</button>
+					  <button type="button" class="btn btn-default">印度</button>
+					  <button type="button" class="btn btn-default">其他</button>
+					</div>
+					<button type="button" class="btn btn-info btn-large btnOk">确定</button>
+				  </li>
+				  
+				</ul>
+			</div>
+			<ol class="breadcrumb">
+			  <li><a href="./">小丑网</a></li>
+			  <li><a href="./movies">全部</a></li>
+			  <li class="active"><%= type %></li>
+			</ol>
+			<div class="movie">
+				<% var movie=JSON.parse( JSON.stringify(movie) ) %>
+				
+				<% if(count==0){ %>
+					
+					<h2>小丑网还未收录《<%= name %>》影片</h2>
+					
+				<% }else{ %>
+				
+					<% for(var i=0;i<Math.ceil(pageCount/4);i++){ %>
+						<% if(i<(Math.ceil(pageCount/4))-1){ %>
+							<div class="row">
+								<% for(var j=0;j<4;j++){ %>
+									<div class="col-sm-6 col-md-3">
+										<div class="thumbnail slice">
+									      <img src="<%= movie[4*i+j].imageUrl %>" alt="<%= movie[4*i+j].name %>">
+									      <h6 class="text-center">
+									       	<a class="text-nowrap" href="./singleMovie?number=<%= movie[4*i+j].number %>"><%= movie[4*i+j].name %>&nbsp;&nbsp;<button class="btn btn-danger"><span class="glyphicon glyphicon-heart"></span><%= movie[4*i+j].like %></button></a>
+									      </h6>
+									      <a href="./singleMovie?number=<%= movie[4*i+j].number %>" class="panel panel-default hideSlice">
+											  <div class="panel-heading"><%= movie[4*i+j].name %></div>
+											  <div class="panel-body table-responsive">
+											  	<table class="table table-bordered">
+													<tr>
+														<td class="text-right">导演:</td>
+														<td><%= movie[4*i+j].director %></td>
+													</tr>
+													<tr>
+														<td  class="text-right">上映时间:</td>
+														<td><%= movie[4*i+j].releaseDate %></td>
+													</tr>
+		
+													<tr>
+														<td  class="text-right">类型:</td>
+														<td><%= movie[4*i+j].type %></td>
+													</tr>
+		
+													<tr>
+														<td  class="text-right">国家:</td>
+														<td><%= movie[4*i+j].country %></td>
+													</tr>
+		
+												</table>
+											    
+											  </div>
+										</a>
+									</div>
+									</div>
+								<% } %>
+							</div>
+						<% }else if(i==Math.ceil(pageCount/4)-1){ %>
+							<div class="row">
+								<% for(var j=0;j<(pageCount-4*i);j++){ %>
+									<div class="col-sm-6 col-md-3">
+										<div class="thumbnail slice">
+									      <img src="<%= movie[4*i+j].imageUrl %>" alt="<%= movie[4*i+j].name %>">
+									      <h6 class="text-center">
+									       	<a class="text-nowrap" href="./singleMovie?number=<%= movie[4*i+j].number %>"><%= movie[4*i+j].name %>&nbsp;&nbsp;<button class="btn btn-danger"><span class="glyphicon glyphicon-heart"></span><%= movie[4*i+j].like %></button></a>
+									      </h6>
+									      <a href="./singleMovie?number=<%= movie[4*i+j].number %>" class="panel panel-default hideSlice">
+											  <div class="panel-heading"><%= movie[4*i+j].name %></div>
+											  <div class="panel-body table-responsive">
+											  	<table class="table table-bordered">
+													<tr>
+														<td class="text-right">导演:</td>
+														<td><%= movie[4*i+j].director %></td>
+													</tr>
+													<tr>
+														<td  class="text-right">上映时间:</td>
+														<td><%= movie[4*i+j].releaseDate %></td>
+													</tr>
+			
+													<tr>
+														<td  class="text-right">类型:</td>
+														<td><%= movie[4*i+j].type %></td>
+													</tr>
+			
+													<tr>
+														<td  class="text-right">国家:</td>
+														<td><%= movie[4*i+j].country %></td>
+													</tr>
+			
+												</table>
+											    
+											  </div>
+										</a>
+									</div>
+									</div>
+								<% } %>
+							</div>
+						<% } %>
+				
+					<% } %>
+				<% } %>
+			</div>
+			  <div class="page">
+					<% for(var i=1;i<=Math.ceil(count/16);i++){ %>
+						<% if(i==page){ %>
+							<a href="./movies?page=<%= i %>" class="btn btn-default active"><%= i %></a>
+						<% }else{ %>
+							<a href="./movies?page=<%= i %>" class="btn btn-default"><%= i %></a>
+						<% } %>
+				    	 
+				    <% } %>
+			  </div>
+
+			
+		</div>
+		
+		
+
+		
+		<% include footer.ejs %>
+	</body>
+</html>

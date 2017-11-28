@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	    <title>小丑网--blog</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/blog.css">
+	  	<link href="/stylesheets/video-js.css" rel="stylesheet">
+	    <script type="text/javascript" src="/javascripts/jquery.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/bootstrap.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/navbar.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/blog.js" charset="utf-8"></script>
+		<link rel="Shortcut Icon" href="/images/icon/icon.ico">
+	</head>
+	
+	<body>
+		<% include header.ejs %>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-9">
+					<h2 class="page-header text-info">最新博客</h2>
+					<% var likeBlog=JSON.parse( JSON.stringify(likeBlog) ) %>
+					<div class="blogWrap">
+						<% for(var i=0;i<likeBlog.length;i++){ %>
+						<div class="media blogImg">
+							<div class="media-left">
+							    <a href="#">
+							    	
+							    <% if(likeBlog[i].logoUrl){ %>
+							    	<img class="media-object" src="<%= likeBlog[i].logoUrl %>" alt="...">
+							    	<% }else{ %>
+							    		<img class="media-object" src="images/timg.jpg" alt="...">
+							    	<% } %>
+							    
+							
+							      
+							    </a>
+							</div>
+							<div class="media-body">
+							    <h4 class="media-heading text-primary"><%= likeBlog[i].name %></h4>
+							    <p class="text-default"><span class=""><%= likeBlog[i].blogLine %></span>
+							    	<span class="pull-right text-muted"><%= (new Date(likeBlog[i].time)).toString().slice(0,-18) %></span>
+							    	
+							    </p>
+							</div>
+						</div>
+						<% } %>
+					</div>
+					<p class="text-center slideDown"><span class="slideSpan glyphicon glyphicon-chevron-down"></span></p>
+				</div>
+				<div class="col-sm-1">
+					
+				</div>
+				<div class="col-sm-2">
+					
+					<h3 class="text-info">我的博客</h3>
+					<% if(!userInfo){ %>
+							<p class="text-danger">您还未登录</p>
+					<% }else{ %>
+						<% var likeMovie=JSON.parse( JSON.stringify(likeMovie) ) %>
+							<div class="well">
+						
+						
+						
+							<h4>我喜欢的电影</h4>
+							<p>
+								
+								<% if(likeMovie[0].like.length==0){ %>
+									还未喜欢影片
+								<% }else{ %>
+									<% for(var i=0;i<likeMovie[0].like.length;i++){ %>
+										<a href="./singleMovie?number=<%= likeMovie[0].like[i].num %>"><%= likeMovie[0].like[i].name %></a>
+									<% } %>
+								<% } %>
+							</p>
+						</div>
+						<!-- Button trigger modal -->
+						<button type="button" class="btn btn-primary center-block sendBlog" data-toggle="modal" data-target="#myModal">
+						 	发表博客
+						</button>
+						
+						<!-- Modal -->
+						<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="myModalLabel"><%= userInfo.name %></h4>
+						      </div>
+						      <div class="modal-body blogBody">
+						      	<div class="blogText">
+								 	<textarea class="form-control textArea"></textarea>
+								</div>
+						       
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						        <button type="button" class="btn btn-primary sendLine">发表</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+							
+							
+					<% } %>
+					
+				
+					
+				</div>
+			</div>
+		</div>
+		
+		<% include footer.ejs %>
+	</body>
+</html>
+	

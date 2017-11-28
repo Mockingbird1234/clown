@@ -1,0 +1,114 @@
+/*全局样式ͨ*/
+body{
+	padding-top:70px; 
+}
+p{
+	text-indent: 10px;
+}
+
+/*bootstrap*/
+.well,.row{
+	margin-top: 20px;
+	margin-bottom: 0px;
+}
+.navbar-brand img{
+	margin-top: -12px;
+}
+
+.modal-backdrop{
+    z-index: 0;
+}
+
+.control-label{
+    font-size: 24px;
+}
+
+/*banner*/
+.carousel-inner .img-responsive{
+	width: 100%!important;
+}
+.carousel-caption{
+	position: absolute;
+	color: #ffffff;
+	background: rgba(0,0,0,0.6);
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	text-align: left;
+	padding: 15px;
+	padding-bottom: 50px;
+}
+
+/* container */
+
+.thumbnail_wrap{
+	margin-bottom: 20px;
+	overflow: hidden;
+	box-shadow: 6px 6px rgba(0,0,0,0.3),12px 12px rgba(0,0,0,0.2);
+	background: url(../images/loading.gif) no-repeat;
+	background-size: 100% 100%;
+	border-radius: 4px;
+	}
+.thumbnail{
+	margin-bottom: 0px!important;
+	transition: transform 1s; 
+	-moz-transition: transform 1s; /* Firefox 4 */
+	-webkit-transition: transform 1s; /* Safari 和 Chrome */
+	-o-transition: transform 1s; /* Opera  */
+	transform-origin:0% 100%;
+	-ms-transform-origin:0% 100%;
+	-moz-transform-origin:0% 100%;
+	-webkit-transform-origin:0% 100%;
+	-o-transform-origin:0% 100%;
+}
+
+
+.userMan{
+	position: relative;
+	text-align: center;
+}
+
+.userMan .list-group{
+	position: absolute;
+	left: 0px;
+	top: 20px;
+}
+
+.center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.alert{
+	position: absolute;
+	display: none;
+	top: 100px;
+	width: 300px;
+	padding: 0px!important;
+	
+}
+.closeAlert{
+	cursor: pointer;
+}
+
+
+.logoUser{
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+}
+
+
+.updata_img{
+	position: relative;
+}
+
+#file_input{
+	cursor: pointer;
+	height: 40px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: 0;
+}

@@ -1,0 +1,62 @@
+.circle{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	overflow: hidden;
+}
+.titleMovie{
+	margin-top: 20px;
+	
+}
+.titleMovie h2{
+text-shadow:-1px -1px white,    
+                -1px -1px #333;
+}
+textarea{
+	resize: none;
+	margin-bottom: 6px;
+}
+body{position: relative;}
+.wrap{
+
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: -1000;
+	opacity: 0.9;
+}
+
+//播放器
+body{background-color: #191919}
+.m{ margin-left: auto; margin-right: auto; margin-top: 10px; }
+
+
+/*@media screen and (min-width:1000px){
+	.m{
+		width: 1000px;
+		height: 500px;
+	}
+	.m video{
+		width: 1000px;
+		height: 500px;
+	}
+      
+
+  }
+  
+@media screen and (max-width:1000px){
+.m{
+		width: 100%;
+		height: 100%;
+	}
+.auto-video{
+  width: 100%;
+  max-width: 100%;
+  padding-top: 56.25%;
+ }
+
+      
+
+  }*/

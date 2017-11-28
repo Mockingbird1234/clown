@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	    <title>小丑网--电影详情</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/singleMovie.css">
+	  	<link href="/stylesheets/video-js.css" rel="stylesheet">
+	    <script type="text/javascript" src="/javascripts/jquery.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/bootstrap.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/navbar.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/singleMovie.js" charset="utf-8"></script>
+	      <script src="/javascripts/videojs-ie8.min.js"></script>
+	      <script src="/javascripts/video.min.js"></script>
+	       <!-- <script>
+		    
+		    videojs.options.flash.swf = "/video/video-js.swf";
+		  </script>-->
+		<link rel="Shortcut Icon" href="/images/icon/icon.ico">
+	</head>
+	<% var movie=JSON.parse( JSON.stringify(movie) ) %>
+	<body>
+		<div class="wrap" style="background: url(<%= movie[0].imageUrl %>);"></div>
+	   <article>
+	   			<% include header.ejs %>
+	   			 
+	   			<div class="m">
+					<video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-tech" controls preload="auto"
+					  poster="<%= movie[0].imageUrl %>" data-setup='{"aspectRatio":"640:267", "playbackRates": [1, 1.5, 2]}'>
+				
+						<source src="<%= movie[0].videoUrl %>" type="video/mp4">
+						<source src="<%= movie[0].videoUrl %>" type="video/webm">
+						<source src="<%= movie[0].videoUrl %>" type="video/ogg">
+						
+							
+						<p class="vjs-no-js">
+						  To view this video please enable JavaScript, and consider upgrading to a web browser that
+						  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+						</p>
+					 </video>
+					  <script type="text/javascript">
+						var myPlayer = videojs('my-video');
+						videojs("my-video").ready(function(){
+							var myPlayer = this;
+							myPlayer.pause();
+						});
+					</script>
+				</div>
+	   			<div class="container titleMovie">
+	   				<div class="media center-block text-center text-primary">
+					  <div class="media-body media-middle">
+					    	<h2 class="media-heading MovieName">
+					    		<%= movie[0].name %>
+					    		
+					    	</h2>
+					    	 <img class="media-object center-block circle" src="<%= movie[0].directorUrl %>" alt="<%= movie[0].name %>">
+					  </div>	
+					</div>
+		   			<div class="row">
+		   				<div class="col-md-5">
+		   					<ul class="list-group text-primary text-center">
+							  <li class="list-group-item">
+							  	<span class="glyphicon glyphicon-film"></span>
+							  	<%= movie[0].releaseDate %>&nbsp;&nbsp;
+							  	 <button class="btn btn-danger likeMovie" role="button">
+                                  <span class="glyphicon glyphicon-heart"></span> <%= movie[0].like %>
+                                </button> 
+							  </li>
+							  <li class="list-group-item">
+							  	<span class="glyphicon glyphicon-user"></span>
+							  	<%= movie[0].director %>
+							  </li>
+							  <li class="list-group-item">
+							  	<span class="glyphicon glyphicon-tags"></span>
+							  	<%= movie[0].type %>
+							  	
+							  </li>
+							  <li class="list-group-item">
+							  	<span class="glyphicon glyphicon-globe"></span>
+							  	<%= movie[0].country %>
+							  </li>
+							  <li class="list-group-item">
+							  	<span class="glyphicon glyphicon-text-background"></span>
+							  	<%= movie[0].content %>
+							  </li>
+							</ul>
+		   				</div>
+		   				<div class="col-md-7">
+		   					<div class="panel panel-default userSpeak">
+		   						
+		   						<div class="panel-heading">精彩影评</div>
+		   						<% if(userInfo){ %>
+		   							<div class="panel-wrap" style="height: 200px;overflow-y: scroll;">
+		   								<% if(movie[0].comment.length==0){ %>
+		   									<div class="panel-body">
+		   										您将是第一个评论者
+		   									</div>
+		   								<% }else{ %>
+		   									<% if(movie[0].comment.length<=3){ %>
+		   										<% for(var i=0;i<movie[0].comment.length;i++){ %>
+			   										<div class="panel-body">
+													    <div class="media">
+														  <div class="media-left">
+														   <span class="glyphicon glyphicon-hand-right"></span>
+														  </div>
+														  <div class="media-body">
+														    <h4 class="media-heading text-info"><%= movie[0].comment[i].name %></h4>
+														    <%= movie[0].comment[i].line %>
+														  </div>
+														</div>
+											  		</div>
+		   										<%  } %>
+		   											
+		   									<% }else{ %>
+		   										<% for(var i=0;i<3;i++){ %>
+			   										<div class="panel-body">
+													    <div class="media">
+														  <div class="media-left">
+														   <span class="glyphicon glyphicon-hand-right"></span>
+														  </div>
+														  <div class="media-body">
+														    <h4 class="media-heading text-info"><%= movie[0].comment[i].name %></h4>
+														    <%= movie[0].comment[i].line %>
+														  </div>
+														</div>
+											  		</div>
+		   										<%  } %>
+		   									<% } %>
+		   									
+		   									
+		   								<% } %>
+		   								
+								  	</div>
+						
+					  		 	<div class="media">
+								  
+									<div class="media-body">
+									   <textarea class="form-control line" rows="2"></textarea>
+									</div>
+									<div class="media-right media-middle">
+									  	<input class="btn btn-info sendLines" type="button" value="发送" />
+									</div>
+								</div>
+							  		 	
+									  
+							</div>
+								<% }else{ %> 
+		   						<div class="panel-body">
+		   							<h1 class="taxt-info">请先登录</h1>
+		   						</div>
+		   						<% } %>
+		   						
+							</div>
+		   				</div>
+		   			</div>
+		   			<div class="container">
+			   			<div class="panel panel-info">
+							  <div class="panel-heading">《<%= movie[0].name %>》经典台词</div>
+							  <div class="panel-body">
+							  	<% for(var i=0;i<movie[0].lines.length;i++){ %>
+							  		<p class="text-success"><%= i+1 %>:<%=  movie[0].lines[i] %></p>
+								<% } %>
+							  </div>
+						</div>
+					</div>
+		   			
+
+	   			</div>
+	   			
+	   			<% include footer.ejs %>
+	   </article>
+	</body>
+</html>
