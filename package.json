@@ -20,7 +20,20 @@
     "ejs": "^2.5.7",
     "cheerio": "^1.0.0-rc.2",
     "request": "^2.83.0",
-    "nodemailer": "^4.4.0"
+    "nodemailer": "^4.4.0",
+
+    "merge-descriptors":"^1.0.1",
+    "finalhandler":"^1.1.0",
+    "ee-first":"^1.1.1",
+    "array-flatten":"^2.1.1",
+    "path-to-regexp":"^2.1.0",
+    "methods": "^1.1.2",
+    "utils-merge":"^1.0.1",
+    "depd":"^1.1.1",
+
+    "crypto":"^1.0.1",
+    "cryptojs":"^2.5.3"
+
   },
   "main": "app.js",
   "author": "刘斌",

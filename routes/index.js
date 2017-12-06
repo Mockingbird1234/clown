@@ -5,6 +5,10 @@ var router = express.Router();
 var util=require('util');
 var nodemailer=require('nodemailer');
 var pachong=require('../pachong.js');
+
+//引入微信加密程序
+var WXBizDataCrypt = require('./WXBizDataCrypt.js')
+
 var emailW="";
 
 /*-------------get方式请求页面------------------*/
@@ -597,6 +601,21 @@ router.post('/delBlog',function(req,res,next){
 	})
 })
 
+
+
+//获取微信小程序数据
+router.post('/getstep',function(req,res,next){
+    var appId = 'wx7fb3640f1d156f75';
+    var sessionKey = req.body.session_key;
+	var encryptedData=req.body.encryptedData;
+	var iv=req.body.iv;
+    var pc = new WXBizDataCrypt(appId, sessionKey)
+
+    var data = pc.decryptData(encryptedData ,iv)
+
+    res.send({data:data});
+
+})
 
 
 
