@@ -32,7 +32,8 @@
     "depd":"^1.1.1",
 
     "crypto":"^1.0.1",
-    "cryptojs":"^2.5.3"
+    "cryptojs":"^2.5.3",
+    "superagent":"*"
 
   },
   "main": "app.js",
