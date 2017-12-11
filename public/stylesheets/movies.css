@@ -1,0 +1,36 @@
+.slice{
+	display: block;
+	position: relative;
+	cursor: pointer;
+	overflow: hidden;
+}
+.slice .panel-body{
+	overflow: hidden;
+}
+.hideSlice{
+	display: block;
+	transition: top 1s;
+	-moz-transition: top 1s; /* Firefox 4 */
+	-webkit-transition: top 1s; /* Safari 和 Chrome */
+	-o-transition: top 1s; /* Opera */
+	position: absolute;
+	left: 0;
+	top: 100%;
+	width: 100%;
+	height: 100%;
+}
+.hideSlice:hover{
+	text-decoration: none;
+}
+.pagination{
+	margin: 0 auto!important;
+}
+.table{
+	font-size: 12px!important;
+}
+.page{
+	margin-top: 10px;
+	text-align: center;
+}
+
+

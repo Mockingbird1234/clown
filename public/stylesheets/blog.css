@@ -1,0 +1,28 @@
+.blogImg img{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.slideDown{
+	margin-top: 20px;
+	
+}
+.slideDown span{
+	font-size: 24px;
+	cursor: pointer;
+}
+.sendBlog{
+	margin-top: 20px;
+}
+.blogBody{
+	height: 200px;
+}
+.blogText{
+	width: 100%;
+	height: 100%!important;
+}
+.textArea{
+	width: 100%;
+	height: 100%!important;
+	resize: none;
+}

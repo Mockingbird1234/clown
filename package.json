@@ -1,0 +1,47 @@
+{
+  "name": "clownm",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "~1.4.3",
+    "cookies": "^0.7.0",
+    "debug": "~2.2.0",
+    "express": "~4.14.0",
+    "formidable": "^1.1.1",
+    "jade": "~1.11.0",
+    "mongoose": "^4.8.5",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0",
+    "socket.io": "^2.0.1",
+    "ejs": "^2.5.7",
+    "cheerio": "^1.0.0-rc.2",
+    "request": "^2.83.0",
+    "nodemailer": "^4.4.0",
+
+    "merge-descriptors":"^1.0.1",
+    "finalhandler":"^1.1.0",
+    "ee-first":"^1.1.1",
+    "array-flatten":"^2.1.1",
+    "path-to-regexp":"^2.1.0",
+    "methods": "^1.1.2",
+    "utils-merge":"^1.0.1",
+    "depd":"^1.1.1",
+
+    "crypto":"^1.0.1",
+    "cryptojs":"^2.5.3",
+    "superagent":"*"
+
+  },
+  "main": "app.js",
+  "author": "刘斌",
+  "license": "ISC",
+  "description": "一个电影网站\r ## 使用方法\r ```\r 1. git clone url\r 2. npm install\r 3. npm start\r ```\r ## 完成功能\r 1. 电影展示\r 2. 电影剪辑播放\r 3. 简单博客评论\r 4. 电影筛选\r 5. 电影后台管理\r ## 技术栈\r 1. bootstrap响应式\r 2. express框架\r 3. mongodb非关系型数据库\r 4. ejs模板引擎\r ### 在线演示网址(heroku部署，速度较慢)\r 点击跳转:[小丑电影网](http://clownm.herokuapp.com)",
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/Mockingbirdcc/clown.git"
+  }
+}

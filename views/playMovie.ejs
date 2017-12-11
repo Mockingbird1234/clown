@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>小丑网--每日一播</title>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	    <link rel="stylesheet" type="text/css" href="/stylesheets/playMovie.css">
+		<link href="/stylesheets/video-js.css" rel="stylesheet">
+	    <script type="text/javascript" src="/javascripts/jquery.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/bootstrap.js" charset="utf-8"></script>
+	    <script type="text/javascript" src="/javascripts/navbar.js" charset="utf-8"></script>
+     	<script src="https://cdn.bootcss.com/socket.io/1.4.7/socket.io.js"></script>
+  		<script type="text/javascript" src="/javascripts/palyMovie.js" charset="utf-8"></script>
+		<script src="/javascripts/videojs-ie8.min.js"></script>
+	     <script src="/javascripts/video.min.js"></script>
+		<link rel="Shortcut Icon" href="/images/icon/icon.ico">
+	</head>
+	<body>
+		<% include header.ejs %>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<h3><%= docs[0].name %>&nbsp;&nbsp;<a href="/singleMovie?number=<%= docs[0].number %>">查看详细信息</a></h3>
+					<div class="m">
+						<video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered vjs-tech" poster="<%= docs[0].imageUrl %>" controls preload="auto" data-setup='{"aspectRatio":"640:267", "playbackRates": [1, 1.5, 2]}'>
+					
+							<source src="<%= docs[0].videoUrl %>" type="video/mp4">
+							<source src="<%= docs[0].videoUrl %>" type="video/webm">
+							<source src="<%= docs[0].videoUrl %>" type="video/ogg">
+							
+								
+							<p class="vjs-no-js">
+							  To view this video please enable JavaScript, and consider upgrading to a web browser that
+							  <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+							</p>
+						 </video>
+						  <script type="text/javascript">
+							var myPlayer = videojs('my-video');
+							videojs("my-video").ready(function(){
+								var myPlayer = this;
+								myPlayer.pause();
+							});
+						</script>
+					</div>
+					
+				</div>
+				<div class="col-md-4">
+					<% if(!userInfo){ %>
+							<h3 class="text-danger">登陆后可加入聊天室</h3>
+					<% }else{ %>
+						<div class="wrapper">
+				         	<h4 class="text-info">小丑聊天室--<span id="status"></span></h4>
+				         	
+				        	<div class="well" id="historyMsg">
+				            </div>
+				        
+				              <div class="input-group">
+							      <input id="messageInput" type="text" class="form-control" placeholder="enter your message">
+							      <span class="input-group-btn">
+							        <button id="sendBtn" class="btn btn-default" type="button">发送</button>
+							      </span>
+							  </div>
+				        </div>
+					<% } %>
+					
+				</div>
+			</div>
+		
+		</div>
+		
+		
+		
+		<% include footer.ejs %>
+	</body>
+</html>

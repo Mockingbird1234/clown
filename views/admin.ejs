@@ -1,0 +1,220 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		
+		<meta charset="utf-8">
+	    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>后台管理</title>
+		<script type="text/javascript" src="/javascripts/jquery.js" charset="utf-8"></script>
+		 <script type="text/javascript" src="/javascripts/bootstrap.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/javascripts/navbar.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/javascripts/admin.js" charset="utf-8"></script>
+		<link rel="stylesheet" type="text/css" href="/stylesheets/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/admin.css">
+		
+		<link rel="Shortcut Icon" href="/images/icon/icon.ico">
+	</head>
+	<body>
+		<% include header.ejs %>
+		<article class="container">
+			
+			<h1 class="text-info">小丑网后台管理</h1>
+			<ul class="nav nav-tabs">
+			  <li role="presentation" class="active"><a href="javascript:;">用户管理</a></li>
+			   <li role="presentation"><a href="javascript:;">电影管理</a></li>
+			  <li role="presentation"><a href="javascript:;">电影录入</a></li>
+			  <li role="presentation"><a href="javascript:;">blog管理</a></li>
+			</ul>
+			
+			<div class="toDo">
+				<div class="bl user">
+					<h3>已有<span class="text-info"><%= users.length %></span>位用户注册了小丑网
+					
+						<button class="btn btn-info pull-right adduser">添加用户</button>
+					</h3>
+						
+					<div class="userTable hide table-responsive">
+						<table class="table table-bordered table-striped table-hover">
+							<tr>
+								<th>用户名</th>
+								<th>邮箱</th>
+								<th>密码</th>
+								<th>是否设置为管理员(Y/N)</th>
+								<th>添加</th>
+							</tr>
+							<tr>
+								<td>
+									<input type="text" name="username" />
+								</td>
+								<td>
+									<input type="text" name="email" />
+								</td>
+								<td>
+									<input type="text" name="password" />
+								</td>
+								<td>
+									<input type="text" name="admin" />
+								</td>
+								<td>
+									<input class="btn btn-info add" type="button" value="添加" />
+								</td>
+							</tr>
+						</table>
+						
+					</div>
+					<div class="col-sm-3 input-group" style="margin-bottom: 20px;">
+							  <input type="text" name="userName" class="form-control userName" placeholder="查找用户邮箱" aria-describedby="basic-addon2">
+							  <span class="input-group-addon searchUser" id="basic-addon2" style="cursor: pointer;">搜索</span>
+						</div>
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped table-hover">
+		 					<tr>
+		 						<th>_id</th>
+		 						<th>用户名</th>
+		 						<th>邮箱</th>
+		 						<th>密码</th>
+		 						<th>是否管理员</th>
+		 						<th>是否删除</th>
+		 					</tr>
+		 					<% if(userInfo.isSuperAdmin&&userInfo.isAdmin){ %>
+		 						<% for(var i=0;i<users.length;i++){ %>
+			 						<tr class="delTr">
+				 						<td><%= users[i]._id %></td>
+				 						<td><%= users[i].name %></td>
+				 						<td class="email"><%= users[i].email %></td>
+				 						<td><%= users[i].password %></td>
+				 						<td><%= users[i].isAdmin %></td>
+				 						<% if(users[i].isSuperAdmin!=true){ %>
+				 							<td class="delUser"><span class="text-info">删除</span></td>
+				 						<% }else{ %>
+				 							<td><span>不可删除</span></td>
+				 						<% } %>
+			 						</tr>
+			 					<% } %>
+		 					<% }else{ %>
+		 						<% for(var i=0;i<users.length;i++){ %>
+			 						<tr class="delTr">
+				 						<td><%= users[i]._id %></td>
+				 						<td><%= users[i].name %></td>
+				 						<td class="email"><%= users[i].email %></td>
+				 						<td><%= users[i].password %></td>
+				 						<td><%= users[i].isAdmin %></td>
+				 						<% if(users[i].isAdmin==false){ %>
+				 							<td class="delUser"><span class="text-info">删除</span></td>
+				 						<% }else{ %>
+				 							<td><span>不可删除</span></td>
+				 						<% } %>
+			 						</tr>
+			 					<% } %>
+		 					<% } %>
+		 					
+		 					
+		 					
+						</table>
+					</div>
+				</div>
+				
+				<div class="bl movieMaseger">
+					<h3>已有<span class="text-info"><%= movieCount %></span>部电影<span class="text-success pull-right">点击电影名字可以修改电影信息</span></h3>
+					<div class="row">
+						<div class="btn-group col-sm-9" role="group" aria-label="...">
+						  <button type="button" class="btn btn-default active">动作</button>
+						  <button type="button" class="btn btn-default">喜剧</button>
+						  <button type="button" class="btn btn-default">爱情</button>
+						   <button type="button" class="btn btn-default">剧情</button>
+						  <button type="button" class="btn btn-default">恐怖</button>
+						  <button type="button" class="btn btn-default">科幻</button>
+						  <button type="button" class="btn btn-default">其他</button>
+							<button type="button" class="btn btn-default sort">根据喜欢数目排序</button>
+						</div>
+						<div class="col-sm-3 input-group">
+							  <input type="text" name="movieN" class="form-control movieN" placeholder="查找影片" aria-describedby="basic-addon2">
+							  <span class="input-group-addon searchMovie" id="basic-addon2" style="cursor: pointer;">搜索</span>
+							</div>
+					</div>
+					
+					
+					<div class="table-responsive">
+						<table class="table table-bordered table-striped table-hover table-responsive">
+		 					<tr>
+		 						<th>电影名</th>
+		 						<th>类型</th>
+		 						<th>国家</th>
+		 						<th>导演</th>
+		 						<th>喜欢数目</th>
+		 						
+		 					</tr>
+		 					
+						</table>
+						
+					
+						
+					</div>
+				</div>
+				<div class="bl movieUpdata">
+					<div action="#" class="form-horizontal">
+						
+						<% var arr=["序号","影片名","上映时间","导演","类型","国家","图片链接","视频链接","导演图片","内容","喜欢","新旧"];var arr2=["number","name","releaseDate","director","type","country","imageUrl","videoUrl","directorUrl","content","like","old"] %>
+						<% var arr3=["填写电影序号(六位数字)","影片名字","xxxx-xx-xx","可填写多位导演","xx/xx/xx","xx/xx/xx","图片的超链接","视频的超链接","导演图片超链接","电影简介","喜欢的个数","是否是新电影（T/F）"] %>
+						<% for(var i=0;i<arr.length;i++){ %>
+						
+						  <div class="form-group">
+						    <label class="col-sm-2 control-label"><%= arr[i] %></label>
+						    <div class="col-sm-10">
+						      <input type="text" class="form-control" placeholder="<%= arr3[i] %>" name="<%= arr2[i] %>">
+						    </div>
+						  </div>
+						<% } %>
+						<div class="form-group">
+							<label class="col-sm-2 control-label">经典语句</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="one">
+								<input type="text" class="form-control" name="two">
+								<input type="text" class="form-control" name="three">
+								<input type="text" class="form-control" name="four">
+								<input type="text" class="form-control" name="five">
+								<input type="text" class="form-control" name="six">
+							</div>
+						</div>
+						<button class="btn btn-info btn-large pull-right sub">提交</button>
+		
+					</div>
+				</div>
+				
+				
+				<div class="bl blogMana">
+					
+					<div class="row">
+						<div class="btn-group col-sm-9" role="group" aria-label="...">
+						  <button type="button" class="btn btn-default active">根据时间排序</button>
+						  <button type="button" class="btn btn-default">根据用户排序</button>
+						</div>
+						<div class="col-sm-3 input-group">
+							  <input type="text" name="blogN" class="form-control blogN" placeholder="查找用户邮箱" aria-describedby="basic-addon2">
+							  <span class="input-group-addon searchBlog" id="basic-addon2" style="cursor: pointer;">搜索</span>
+						</div>
+					</div>
+					
+					
+					
+					<table class="table table-bordered table-striped table-hover">
+		 					<tr>
+		 						<th>用户名</th>
+		 						<th>邮箱</th>
+		 						<th>博客内容</th>
+		 						<th>发表时间</th>
+		 						<th>是否删除</th>
+		 					</tr>
+		 			</table>
+				</div>
+					
+			</div>
+			
+		</article>
+		
+		<div class="load">
+			<img src="/images/load.gif" />
+		</div>
+	</body>
+</html>

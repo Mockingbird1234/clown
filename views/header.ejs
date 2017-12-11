@@ -1,0 +1,261 @@
+ <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#clownNav">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="./" class="navbar-brand">
+                      <img src="/images/logo.png" alt="brand" width="45px">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="clownNav">
+                    <ul class="nav navbar-nav">
+                        <li class="text-center"><a href="/">首页</a></li>
+                        <li class="text-center dropdown"><a href="javascript:;" class="dropdown-toggle" id="movieMenu" data-toggle="dropdown">分类<span class="caret"></span></a>
+                           <ul class="dropdown-menu" aria-labelledby="movieMenu">
+                              <li class="text-center"><a href="./movies?type=动作">动作片</a></li>
+                              <li class="text-center"><a href="./movies?type=喜剧">喜剧片</a></li>
+                              <li class="text-center"><a href="./movies?type=爱情">爱情片</a></li>
+                              <li role="separator" class="divider"></li>
+                              <li class="text-center"><a href="/movies">更多</a></li>
+                            </ul>
+                        </li>
+                        <li class="text-center"><a href="/blog">Blog</a></li>
+                        <li class="text-center"><a href="/playMovie">每日一播</a></li>
+                        <li class="text-center"><a href="/about">关于</a></li>
+                    </ul>
+                    
+                     <ul class="userUl nav navbar-nav navbar-right ">
+                     	
+                     	<% if(userInfo){ %>
+                     		<% if(userInfo.isAdmin&&userInfo.isSuperAdmin){ %>
+                     			<li class="userMan dropdown">
+                     				<a class="dropdown-toggle text-success" href="javascript:;" data-toggle="dropdown">超级管理员:<strong class="text-info"><%= userInfo.name %></strong></a>
+                     				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                     					<li class="updata_img">
+                     						<input title="选择小于1M的图片" type="file" id="file_input">
+                     						<% if(userInfo.logoUrl){ %>
+                     						<img class="logoUser img-responsive img-circle center-block" src="<%= userInfo.logoUrl %>"  />
+                     						<% }else{ %>
+                     							<img class="logoUser img-responsive img-circle center-block" src="/images/timg.jpg" />
+                     						<% } %>	
+                     					</li>
+									     <li>
+									     	<a href="/person"> 喜欢影片
+										    	<span class="badge"><%= userInfo.like.length %></span>
+										  	</a>
+										  </li>
+										  <li>
+									     	<a href="/person"> 发表博客
+										    	<span class="badge"><%= userInfo.blog.length %></span>
+										  	</a>
+										  </li>
+										  <li>
+									     	<a href="/admin"> 后台管理
+										    
+										  	</a>
+										  </li>
+									    <li role="separator" class="divider"></li>
+									    <li><a class="logOut" href="javascript:;">退出</a></li>
+									  </ul>
+                     			</li>
+                     		<% }else if(userInfo.isAdmin){ %>
+                     			<li class="userMan dropdown">
+                     				<a class="dropdown-toggle" href="javascript:;" data-toggle="dropdown">你好管理员:<strong class="text-info"><%= userInfo.name %></strong></a>
+                     				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                     					<li class="updata_img">
+                     						<input title="选择小于1M的图片" type="file" id="file_input">
+                     						<% if(userInfo.logoUrl){ %>
+                     						<img class="logoUser img-responsive img-circle center-block" src="<%= userInfo.logoUrl %>"  />
+                     						<% }else{ %>
+                     							<img class="logoUser img-responsive img-circle center-block" src="/images/timg.jpg" />
+                     						<% } %>	
+                     					</li>
+									     <li>
+									     	<a href="/person"> 喜欢影片
+										    	<span class="badge"><%= userInfo.like.length %></span>
+										  	</a>
+										  </li>
+										  <li>
+									     	<a href="/person"> 发表博客
+										    	<span class="badge"><%= userInfo.blog.length %></span>
+										  	</a>
+										  </li>
+										  <li>
+									     	<a href="/admin"> 后台管理
+										    
+										  	</a>
+										  </li>
+									    <li role="separator" class="divider"></li>
+									    <li><a class="logOut" href="javascript:;">退出</a></li>
+									  </ul>
+                     			</li>
+                     		<% }else{ %>
+                     			<li class="userMan dropdown">
+                     				<a class="dropdown-toggle" href="javascript:;" data-toggle="dropdown">你好:<strong class="text-info"><%= userInfo.name %></strong></a>
+                     				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                     					<li class="updata_img">
+                     						<input title="选择小于1M的图片" type="file" id="file_input">
+                     						<% if(userInfo.logoUrl){ %>
+                     						<img class="logoUser img-responsive img-circle center-block" src="<%= userInfo.logoUrl %>"  />
+                     						<% }else{ %>
+                     							<img class="logoUser img-responsive img-circle center-block" src="/images/timg.jpg" />
+                     						<% } %>	
+                     					</li>
+
+									     <li>
+									     	<a href="/person"> 喜欢影片
+										    	<span class="badge"><%= userInfo.like.length %></span>
+										  	</a>
+										  </li>
+										  <li>
+									     	<a href="/person"> 发表博客
+										    	<span class="badge"><%= userInfo.blog.length %></span>
+										  	</a>
+										  </li>
+									    <li role="separator" class="divider"></li>
+									    <li><a class="logOut" href="javascript:;">退出</a></li>
+									  </ul>
+                     			</li>
+                     		<% } %>
+                     	<% }else{ %>
+	                        <li>
+	                            <a data-toggle="modal" data-target="#logIn" href="javascript:;" class="text-center">登录</a>
+	                            <div class="modal fade" id="logIn" tabindex="-1" role="dialog" aria-labelledby="logIn">
+	                                <div class="modal-dialog modal-sm" role="document">
+	                                    <div class="modal-content">
+	                                        <div class="modal-header">
+	                                            <button class="close" data-dismiss="modal" aria-label="Close">×</button>
+	                                            <h4 class="modal-title">小丑网登陆</h4>
+	                                        </div>
+	
+	                                        <div class="modal-body">
+	                                              <form class="form-horizontal ng-pristine ng-valid">
+	                                                  <div class="form-group">
+	                                                      <label for="userName" class="col-xs-2 control-label text-primary glyphicon glyphicon-user"></label>
+	                                                      <div class="col-xs-10">
+	                                                          <input type="email" class="form-control" id="userName" placeholder="邮箱账号">
+	                                                      </div>
+	
+	                                                  </div>
+	                                                  <div class="form-group">
+	                                                      <label for="userPassword" class="col-xs-2 control-label text-primary glyphicon glyphicon-lock"></label>
+	                                                      <div class="col-xs-10">
+	                                                          <input type="password" class="form-control" id="userPassword" placeholder="密码">
+	                                                      </div>
+	
+	                                                  </div>
+	                                              </form>
+	                                        </div>
+	                                        <div class="modal-footer">
+	                                            <button class="btn btn-default" data-dismiss="modal">关闭</button>
+	                                            <button class="btn btn-primary logIn">登陆</button>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	
+	                        </li>
+	                        <li class="LogRe">
+                            <a data-toggle="modal" data-target="#register" href="javascript:;" class="text-center aRe">注册</a>
+                            <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="register">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button class="close" data-dismiss="modal" aria-label="Close">×</button>
+                                            <h4 class="modal-title">小丑网注册</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+                                            <form class="form-horizontal ng-pristine ng-valid">
+                                                <div class="form-group">
+                                                    <label for="userN" class="col-xs-2 control-label text-primary glyphicon glyphicon-user"></label>
+                                                    <div class="col-xs-10">
+                                                        <input type="text" class="form-control" id="userN" name="name" placeholder="用户名(字母开头6-12位)">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="email" class="col-xs-2 control-label text-primary glyphicon glyphicon-envelope"></label>
+                                                    <div class="col-xs-7">
+                                                        <input type="email" class="form-control" name="email" id="email" placeholder="邮箱">
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <button class="btn btn-primary send">发送验证码</button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="userP" class="col-xs-2 control-label text-primary glyphicon glyphicon-lock"></label>
+                                                    <div class="col-xs-10">
+                                                        <input type="password" class="form-control" name="password" id="userP" placeholder="密码（字母开头6-12位）">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="rUserP" class="col-xs-2 control-label text-primary glyphicon glyphicon-retweet"></label>
+                                                    <div class="col-xs-10">
+                                                        <input type="password" class="form-control" id="rUserP" placeholder="再次输入密码">
+                                                    </div>
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="idCode" class="col-xs-2 control-label text-primary glyphicon glyphicon-text-size"></label>
+                                                    <div class="col-xs-10">
+                                                        <input type="text" class="form-control" id="idCode" placeholder="验证码">
+                                                    </div>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-default" data-dismiss="modal">关闭</button>
+                                            <button class="btn btn-primary register">注册</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+						<% } %>	
+                    </ul>
+                    <form class="navbar-form navbar-right ng-pristine ng-valid" role="search">
+                        <div class="form-group">
+                          <input type="text" class="form-control search" placeholder="搜索">
+                        </div>
+                        <button type="button" class="btn btn-default search-btn"><span class="glyphicon glyphicon-search"></span></button>
+                      </form>
+                   
+                </div>
+            </div>
+          </div>
+        </nav>
+ 
+
+<script type="text/javascript">
+	$("input[type='file']").change(function(){   
+ var file = this.files[0];
+   if (window.FileReader) {    
+            var reader = new FileReader();    
+            reader.readAsDataURL(file);    
+            //监听文件读取结束后事件    
+          reader.onloadend = function (e) {
+          	var logo=e.target.result;
+            $(".logoUser").attr("src",logo);    //e.target.result就是最后的路径地址
+            
+            $.ajax({
+            	type:"post",
+            	url:"/logoUser",
+            	data:{
+            		logoUrl:logo
+            	},
+            	success:function(data){
+            	
+            	},
+            	async:true
+            });
+            };    
+       }
+});
+</script>
